@@ -18,7 +18,7 @@ export const DigitalOperationalButton: React.FC<DigitalOperationalButtonProps> =
     selectOperation
 }) => {
     return (
-        <Grid item>
+        <Grid item xs={3}>
             <StyledButton fullWidth variant="outlined" onClick={() => selectOperation(operational)}
             selected={selectedOperation === operational} 
             >

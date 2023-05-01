@@ -40,6 +40,21 @@ function App() {
   selectOperation={selectOperation}
   selectedOperation={operation}
   />
+   <DigitalOperationalButton 
+  operational={"C"}
+  selectOperation={selectOperation}
+  selectedOperation={operation}
+  />
+   <DigitalOperationalButton 
+  operational={"%"}
+  selectOperation={selectOperation}
+  selectedOperation={operation}
+  />
+   <DigitalOperationalButton 
+  operational={"+"}
+  selectOperation={selectOperation}
+  selectedOperation={operation}
+  />
   </Grid>
   </Grid>
      </CalculatorBase>
