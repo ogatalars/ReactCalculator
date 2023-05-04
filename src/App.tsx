@@ -21,13 +21,41 @@ const CalculatorBase = styled(Paper)(({ theme }) => ({
 function App() {
   const [currentValue, setCurrentValue] = useState("0");
   const [operation, setOperation] = useState("");
+  const [prevValue, setprevValue] = useState("");
+  const [overwrite, setOverwrite] = useState(true);
 
+  const clear = () => {
+    setprevValue("");
+    setOperation("");
+    setCurrentValue("0");
+    setOverwrite(true)
+  }
+
+  const del = () => {
+    setCurrentValue("0");
+    setOverwrite(true)
+
+  }
+
+  const percent = () => {
+    const curr = parseFloat(currentValue);
+    setCurrentValue((curr / 100).toString());
+  }
+
+
+  
   const selectOperation = (operation: string) => {
     setOperation(operation);
   };
 
   const setDigit = (digit: string) => {
-    setCurrentValue(digit);
+    if(currentValue[0] === "0" && digit === "0") return;
+    if(currentValue.includes(".") && digit === ".") return;
+    if(overwrite && digit !== ".") {
+      setCurrentValue(digit);
+    } else(setCurrentValue(`${currentValue}${digit}`))
+    ;
+    setOverwrite(false)
   };
 
   return (
@@ -40,17 +68,17 @@ function App() {
           <Grid item container columnSpacing={1}>
             <DigitalOperationalButton
               operational={"AC"}
-              selectOperation={selectOperation}
+              selectOperation={clear}
               selectedOperation={operation}
             />
             <DigitalOperationalButton
               operational={"C"}
-              selectOperation={selectOperation}
+              selectOperation={del}
               selectedOperation={operation}
             />
             <DigitalOperationalButton
               operational={"%"}
-              selectOperation={selectOperation}
+              selectOperation={percent}
               selectedOperation={operation}
             />
             <DigitalOperationalButton
