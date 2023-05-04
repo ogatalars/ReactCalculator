@@ -24,6 +24,37 @@ function App() {
   const [prevValue, setprevValue] = useState("");
   const [overwrite, setOverwrite] = useState(true);
 
+  const calculate = () => {
+    if(!prevValue || !operation) return currentValue;
+    const curr = parseFloat(currentValue);
+    const prev = parseFloat(prevValue);
+
+    let result;
+    switch(operation) {
+      case "/": 
+      result = prev / curr;
+      break;
+      case "*": 
+      result = prev * curr;
+      break;
+      case "-": 
+      result = prev - curr;
+      break;
+      case "+": 
+      result = prev + curr;
+      break;
+    } 
+    return result 
+  }
+
+  const equals = () => {
+    const val = calculate();
+    setCurrentValue(`${val}`);
+    setprevValue("");
+    setOperation("");
+    setOverwrite(true)
+  }
+
   const clear = () => {
     setprevValue("");
     setOperation("");
@@ -45,7 +76,16 @@ function App() {
 
   
   const selectOperation = (operation: string) => {
+    if(prevValue){
+      const val = calculate();
+      setCurrentValue(`${val}`);
+      setprevValue(`${val}`)
+    } else {
+      setprevValue(currentValue)
+    }
+    setprevValue(currentValue)
     setOperation(operation);
+    setOverwrite(true)
   };
 
   const setDigit = (digit: string) => {
@@ -121,8 +161,8 @@ function App() {
               <Grid item container columnSpacing={1}>
                 <DigitalButton digit={"0"} enterDigit={setDigit} xs={6} />
                 <DigitalButton digit={"."} enterDigit={setDigit} />
-                <Grid item xs={6}>
-                  <Button fullWidth variant="contained">
+                <Grid item xs={2}>
+                  <Button fullWidth variant="contained" onClick={equals}>
                     =
                   </Button>
                 </Grid>
