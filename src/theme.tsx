@@ -11,14 +11,14 @@ const theme = createTheme({
             MuiButton: {
                 styleOverrides: {
                     root: {
-                        borderRadius: 15
+                        borderRadius: 25
                     }
                 }
             }
         }, 
         typography: {
             button: {
-                fontSize: "2rem"
+                fontSize: "1rem"
             }
         }
 })
